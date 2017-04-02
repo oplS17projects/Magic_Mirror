@@ -37,7 +37,7 @@ Results will be determined by unit testing, file-caching, and error handling. Su
 
 
 ## Architecture Diagram
-![FP4 Diagram](fp4_diagram-v2.png "FP4 Diagram")  
+![FP4 Diagram](https://github.com/oplS17projects/Magic_Mirror/blob/master/fp4-diagram-v2.png "FP4 Diagram")  
 
 The front-end is responsible for requesting the current weather and/or forecast data for a specified city and country/state. It parses these results and displays them on the mirror.  
 
