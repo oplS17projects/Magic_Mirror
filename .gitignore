@@ -1,6 +1,10 @@
 ### Project Specific ###
 api-keys.rkt
 
+weather_data/
+tests/
+
+
 
 # Created by https://www.gitignore.io/api/racket
 
