@@ -68,18 +68,16 @@
 ;            (left(img ([src "cloudy.png"]))); this outputs the picture
 ;            
 ;           ))))
-
-; THIS LIST (Dayton, OH) IS HARD CODED FOR NOW 
+(define (start req)
 (define Dayton-OH( weather "current" "Dayton" "Ohio")) ; new data set
 (define Dayton-time( get-time "Dayton" "OH"))
-
-(define (start req)
   (response/xexpr
    `(html(head (titile "Magic Mirror")); title of webpage; "`" is called a quasiqutoe 
          (body
-          (left (h1 "This is above what you want to see.")) (br)
+          (left (h1 "Current Date: ",(car(cdr Dayton-time))))(br) ; this updates automatically
+          (left (h1 "Current time: ", (cdr(cdr Dayton-time )))) (br) ; this updates automatically
           (left (h2 , (finder "city" Dayton-OH))(br)
-                (h2 "Current temperature: ",(number->string (finder "current" Dayton-OH))))(br)
+                (h2 "Current temperature: ",(number->string (finder "current" Dayton-OH))))(br) ; this updates automatically
                 (left (img ([src ,(pic_weather (finder "description" Dayton-OH))])))                                                               
           (h3 "The end")
           ))))
