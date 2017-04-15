@@ -35,20 +35,32 @@
 
 ; How do I change the color of the text?
 ; How do I change the background to say blue?
-;
-(number->string(finder "current" list1))
+
+; pass a string in, appends ".png" 
+(define (pic_weather string)
+  (string-append "cloudy" ".png"))
+
+; displays newline in repl
+(define (repl_newline)
+  (display "\n"))
+(display "\n");
+(display (pic_weather (finder "city" list1)))
+(display "\n")
+
+;(number->string(finder "current" list1))
 (date-display-format 'american)
  (define title1 "Magic Mirror");
 (define (start req); start is a function that takes a request 
   (response/xexpr
    `(html (head (title "Magic Mirror")); this is the title of the webpage
           (body
-           (left (h1 "I am above what you want to see"))(br)
+           ;(left (h1 "I am above what you want to see."))(br)
            ;(center (h2 (string-append "test"  (number->string eight)))) ; should see an 8
-           (left (h3,(finder "city" list1) (br)
-                       ,(number->string(finder "current" list1))(br) ; I want to see the number 50.58
+           (left (h3 "City is: ",(finder "city" list1) (br)
+                    "Humidity: ",(number->string(finder "humidity" list1)) (br)
+                     "Current temp: " ,(number->string(finder "current" list1)) " Farenheit"(br) ; I want to see the number 50.58
                        ,(finder "description" list1))) (br)
-            (left(img ([src "cloudy.png"]))) ; this outputs the picture
+            (left(img ([src "cloudy.png"]))); this outputs the picture
             
            ))))
 
