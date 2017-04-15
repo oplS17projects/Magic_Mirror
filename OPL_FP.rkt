@@ -50,6 +50,13 @@
 ;(display (pic_weather (finder "city" list1)))
 ;(display "\n")
 
+; gets current date from a date object 
+(define (get-current-date arg)
+  (car(cdr arg)))
+
+; gets current time from a date object
+(define (get-current-time arg)
+  (cdr (cdr arg)))
 
 ;(number->string(finder "current" list1))
 (date-display-format 'american)
@@ -74,8 +81,8 @@
   (response/xexpr
    `(html(head (titile "Magic Mirror")); title of webpage; "`" is called a quasiqutoe 
          (body
-          (left (h1 "Current Date: ",(car(cdr Dayton-time))))(br) ; this updates automatically
-          (left (h1 "Current time: ", (cdr(cdr Dayton-time )))) (br) ; this updates automatically
+          (left (h1 "Current Date: ",(get-current-date Dayton-time)))(br) ; this updates automatically
+          (left (h1 "Current time: ", (get-current-time Dayton-time))) (br) ; this updates automatically
           (left (h2 , (finder "city" Dayton-OH))(br)
                 (h2 "Current temperature: ",(number->string (finder "current" Dayton-OH))))(br) ; this updates automatically
                 (left (img ([src ,(pic_weather (finder "description" Dayton-OH))])))                                                               
