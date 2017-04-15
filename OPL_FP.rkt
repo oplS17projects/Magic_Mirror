@@ -9,6 +9,8 @@
          (file "weather.rkt")
         ; racket/promise
          )
+(require (file "time.rkt"))
+(require (file "wotd.rkt"))
 ;(define list1 '(("city" . "Meredith")
 ;  ("current" . 50.58)
 ;  ("high" . 51.8)
@@ -41,12 +43,13 @@
 (define (pic_weather string)
   (string-append "cloudy" ".png"))
 
-; displays newline in repl
-(define (repl_newline)
-  (display "\n"))
-(display "\n");
+;; displays newline in repl
+;(define (repl_newline)
+;  (display "\n"))
+;(display "\n");
 ;(display (pic_weather (finder "city" list1)))
-(display "\n")
+;(display "\n")
+
 
 ;(number->string(finder "current" list1))
 (date-display-format 'american)
@@ -65,14 +68,17 @@
 ;            (left(img ([src "cloudy.png"]))); this outputs the picture
 ;            
 ;           ))))
-; THIS LIST IS HARD CODED FOR NOW 
-(define Dayton-OH( weather "current" "Dayton" "Ohio")) ; new data set 
+
+; THIS LIST (Dayton, OH) IS HARD CODED FOR NOW 
+(define Dayton-OH( weather "current" "Dayton" "Ohio")) ; new data set
+(define Dayton-time( get-time "Dayton" "OH"))
+
 (define (start req)
   (response/xexpr
    `(html(head (titile "Magic Mirror")); title of webpage; "`" is called a quasiqutoe 
          (body
           (left (h1 "This is above what you want to see.")) (br)
-          (left (h2 "City is: ", (finder "city" Dayton-OH))(br)
+          (left (h2 , (finder "city" Dayton-OH))(br)
                 (h2 "Current temperature: ",(number->string (finder "current" Dayton-OH))))(br)
                 (left (img ([src ,(pic_weather (finder "description" Dayton-OH))])))                                                               
           (h3 "The end")
