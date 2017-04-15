@@ -1,8 +1,17 @@
+### Project Specific ###
+api-keys\.rkt
 
+weather_data/
 tests/
 
-weather_data/current/
 
-weather_data/forecast/
 
-api-keys\.rkt
+# Created by https://www.gitignore.io/api/racket
+
+### Racket ###
+*~
+*.bak
+
+compiled/
+
+# End of https://www.gitignore.io/api/racket
