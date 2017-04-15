@@ -6,3 +6,9 @@ weather_data/current/
 weather_data/forecast/
 
 api-keys\.rkt
+
+compiled/drracket/errortrace/
+
+*.rkt#1#
+
+*.rkt
