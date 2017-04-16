@@ -1,5 +1,5 @@
 #lang racket
-(require net/url json 2htdp/batch-io gregor)
+(require net/url json gregor)
 
 (require (file "api-keys.rkt"))
 (provide weather)
@@ -26,9 +26,6 @@
 
 (define (network-failure)
   (λ _ (printf "Network Unavailable\n")))
-
-(define (cache-failure)
-  (λ _ (printf "Cache Unavailable\n")));; isn't currently being used (within weather... need to check parser)
 
 (define (no-network-or-cache)
   (λ _ (printf "No Network Or Cache Available\n"))) ;; isn't currently used
@@ -65,12 +62,17 @@
 
 (define (fetch-weather url stream-type city state-country)
   (let ([file-path (string-append "weather_data/" stream-type "/" city " - " state-country ".json")])
-  (let ([remote-data
-         (port->string (get-pure-port
-                        (string->url
-                         (string-append url (string-append city "," state-country) options "&appid=" weather-key))))])
-    (write-file file-path remote-data)
+    (let ([remote-data
+           (port->string (get-pure-port
+                          (string->url
+                           (string-append url (string-append city "," state-country) options "&appid=" weather-key))))])
+        (write-out file-path remote-data)
   )))
+
+(define (write-out file-path data)
+  (call-with-output-file* file-path #:exists 'replace #:mode 'text
+   (lambda (x)
+     (display data x))))
 
 ;; Parsers
 (define (parse-weather-current filename)
@@ -143,3 +145,4 @@
         [(= 4 n) "Thursday"]
         [(= 5 n) "Friday"]
         [else "Saturday"]))
+
