@@ -4,8 +4,6 @@
 (require (file "api-keys.rkt"))
 (provide weather)
 
-;; TODO:
-;; Unit Testing
 (define current-url "http://api.openweathermap.org/data/2.5/weather?q=")
 (define forecast-url "http://api.openweathermap.org/data/2.5/forecast/daily?q=")
 (define options "&mode=json&units=imperial&cnt=7")
@@ -19,16 +17,16 @@
   (make-dir "weather_data/forecast")
 
   (cond
-    [(string=? stream-type "current") (get-weather current-url stream-type city state-country)];(weather-current current-url stream-type city state-country)]
-    [(string=? stream-type "forecast") (get-weather forecast-url stream-type city state-country)];(weather-forecast forecast-url stream-type city state-country)]
+    [(string=? stream-type "current") (get-weather current-url stream-type city state-country)]
+    [(string=? stream-type "forecast") (get-weather forecast-url stream-type city state-country)]
     [else null]
   ))
 
 (define (network-failure)
   (λ _ (printf "Network Unavailable\n")))
 
-(define (no-network-or-cache)
-  (λ _ (printf "No Network Or Cache Available\n"))) ;; isn't currently used
+;;(define (no-network-or-cache)
+;;  (λ _ (printf "No Network Or Cache Available\n"))) ;; isn't currently used
 
 (define (cache-valid? filename)
   (if (and (file-exists? filename) (< (get-file-age filename) max-cache-age-hours)) #t
