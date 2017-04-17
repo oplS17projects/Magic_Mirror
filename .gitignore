@@ -1,7 +1,7 @@
 ### Project Specific ###
 api-keys\.rkt
-
 Scratchpad\.rkt
+preferences\.json
 
 weather_data/
 tests/
