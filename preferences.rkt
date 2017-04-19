@@ -133,7 +133,7 @@
                     [label "Ok"]
                     ;;[callback (λ (text-field event)
                     ;;            (test (send txt-datetime-city get-value)))]))
-                    [callback (λ (text-field event) (set-preferences))]))
+                    [callback (λ (text-field event) (write-preferences))]))
 
 (define prefsx
   (list #hasheq((weather-city . (send txt-datetime-city get-value)))
@@ -162,7 +162,7 @@
    (lambda (x)
      (display data x))))
 
-(define (set-preferences)
+(define (write-preferences)
   (let ([data (prefs
                (send txt-weather-city get-value)
                (send txt-weather-state get-value)
@@ -172,21 +172,6 @@
       (write-out prefs-file (jsexpr->string (prefs->jsexpr data)))
       (send frame show #f))))
 
-
-
-
-(send frame show #t)
-
-
-
-
-
-
-
-
-
-
-
-
-
+(define (set-preferences)
+  (send frame show #t))
 
