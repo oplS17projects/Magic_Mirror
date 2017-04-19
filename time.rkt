@@ -5,7 +5,6 @@
 
 (provide get-time)
 
-;; TO-DO check on failure to connect to network and failure to DL cache
 
 ;; Current weather URL needed to get lat and long for timezonedb
 (define weather-options "&mode=json&units=imperial&cnt=7")
@@ -14,17 +13,15 @@
   (string-append "http://api.timezonedb.com/v2/get-time-zone?key=" time-key "&format=json&by=position&"))
 
 (define (get-time city state-country)
-  (define coords (coordinates city state-country))
-  (define latitude (cdar coords))
-  (define longitude (cdadr coords))
-  (define timezonedb (string-append timezonedb-url "lat=" (number->string latitude) "&lng=" (number->string longitude)))
-  (define remote-data (read-json (get-pure-port (string->url timezonedb))))
-  (define zone (hash-ref remote-data 'zoneName))
-  (define time (convert-time (hash-ref remote-data 'timestamp)))
-  (define date (convert-date date->iso8601 (hash-ref remote-data 'timestamp)))
-  (cons zone (cons date time))
-  )
-         
+  (let ([coords (coordinates city state-country)])
+    (let ([timezonedb (string-append timezonedb-url
+                                     "lat=" (number->string (cdar coords))
+                                     "&lng=" (number->string (cdadr coords)))])
+      (let ([remote-data (read-json (get-pure-port (string->url timezonedb)))])
+        (let ([zone (hash-ref remote-data 'zoneName)])
+          (cons zone (javascript-date (hash-ref remote-data 'timestamp))))))))
+
+       
 (define (network-failure)
   (λ _ (printf "Network Unavailable\n")))
 
@@ -89,12 +86,24 @@
     (write-file file-path remote-data)
   )))
 
-(define convert-date (λ (format dt)
-                       (format (->date (posix->datetime dt)))))
+;;FORMAT: new Date(year, month, day, hours, minutes, seconds, milliseconds);
+(define (javascript-date data)
+  (let ([year (parse-date-time ->year ->date data)])
+    (let ([month (parse-date-time ->month ->date data)])
+      (let ([day (parse-date-time ->day ->date data)])
+        
+        (let ([hours (parse-date-time ->hours ->time data)])
+          (let ([minutes (parse-date-time ->minutes ->time data)])
+            (let ([seconds (parse-date-time ->seconds ->time data)])
+              
+              (string-append (number->string year) ","
+                             (number->string month) ","
+                             (number->string day) ","
+                             (number->string hours) ","
+                             (number->string minutes) ","
+                             (number->string seconds)))))))))
 
-(define (convert-time n)
-  (time->iso8601 (->time (posix->datetime n))))
 
-; difference?
-    (define convert-time-lambda
-  (λ (n) (time->iso8601 (->time (posix->datetime n)))))
+(define parse-date-time (λ (format proc dt)
+                          (format (proc (posix->datetime dt)))))
+
