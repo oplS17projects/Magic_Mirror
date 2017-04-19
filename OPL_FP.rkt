@@ -1,54 +1,26 @@
 #lang racket ; insta auto calls servlet 
 (require web-server/servlet
          web-server/servlet-env
-        ; web-server/dispatch
          web-server/http
-         ; web-server/templates
-        ; 2htdp/image
          racket/date
          (file "weather.rkt")
-        ; racket/promise
          )
 (require (file "time.rkt"))
 (require (file "wotd.rkt"))
-;(define list1 '(("city" . "Meredith")
-;  ("current" . 50.58)
-;  ("high" . 51.8)
-;  ("low" . 50)
-;  ("humidity" . 34)
-;  ("wind" . 26.410761154855646)
-;  ("description" . "Clouds")))
+(require web-server/templates)
+(require (file "preferences.rkt"))
+(require xml)
+;(include-template "test.html")
 ; functions
 (define (finder word list)
  (cond ((null? list) "Nothing Found")
        ((and (pair? (car list))
             (string=? word (car(car list)))) (cdr(car list)))
        (else (finder word (cdr list)))))
-;(define (adder a b) (+ a b))
-; test data 
-;(define city (finder "city" list1))
-;(define two 2)
-;(define number_list (list 1 2 3 4 5))
-;(define eight 8)
-; What are some funcitons that would make my life easier?
-; finder funciton so i can ask for say "current" and get back the current temp
-
-; What HOF functions would come in handy? map, filter, foldr/foldl, accumulate, bucket
-; I kind of made something similar to a  filter 
-
-; How do I change the color of the text?
-; How do I change the background to say blue?
 
 ; pass a string in, appends ".png" 
 (define (pic_weather string)
-  (string-append "cloudy" ".png"))
-
-;; displays newline in repl
-;(define (repl_newline)
-;  (display "\n"))
-;(display "\n");
-;(display (pic_weather (finder "city" list1)))
-;(display "\n")
+  (string-append string ".png"))
 
 ; gets current date from a date object 
 (define (get-current-date arg)
@@ -61,34 +33,24 @@
 ;(number->string(finder "current" list1))
 (date-display-format 'american)
  (define title1 "Magic Mirror Dynamic");
-; below is all hard coded 
-;(define (start req); start is a function that takes a request 
-;  (response/xexpr
-;   `(html (head (title "Magic Mirror")); this is the title of the webpage
-;          (body
-;           ;(left (h1 "I am above what you want to see."))(br)
-;           ;(center (h2 (string-append "test"  (number->string eight)))) ; should see an 8
-;           (left (h3 "City is: ",(finder "city" list1) (br)
-;                    "Humidity: ",(number->string(finder "humidity" list1)) (br)
-;                     "Current temp: " ,(number->string(finder "current" list1)) " Farenheit"(br) ; I want to see the number 50.58
-;                       ,(finder "description" list1))) (br)
-;            (left(img ([src "cloudy.png"]))); this outputs the picture
-;            
-;           ))))
-(define (start req)
-(define Dayton-OH( weather "current" "Dayton" "Ohio")) ; new data set
-(define Dayton-time( get-time "Dayton" "OH"))
+; doesn't work on windows 10 unless you run racket as an adminstrator, it needs the permission to create
+; required folder structure 
+(define (start req) 
   (response/xexpr
-   `(html(head (titile "Magic Mirror")); title of webpage; "`" is called a quasiqutoe 
+   `(html(head (title "Magic Mirror")); title of webpage; "`" is called a quasiqutoe 
          (body
-          (left (h1 "Current Date: ",(get-current-date Dayton-time)))(br) ; this updates automatically
-          (left (h1 "Current time: ", (get-current-time Dayton-time))) (br) ; this updates automatically
-          (left (h2 , (finder "city" Dayton-OH))(br)
-                (h2 "Current temperature: ",(number->string (finder "current" Dayton-OH))))(br) ; this updates automatically
-                (left (img ([src ,(pic_weather (finder "description" Dayton-OH))])))                                                               
-          (h3 "The end")
-          ))))
-;(display "Believe\n")
+          ;(left (h1 "Current Date: ",(get-current-date Dayton-time)))(br) ; this updates automatically
+          ;(left (h1 "Current time: ", (get-current-time Dayton-time))) (br) ; this updates automatically
+          ;(left (h2 , (finder "city" Dayton-OH))(br)
+                ;(h2 "Current temperature: ",(number->string (finder "current" Dayton-OH))))(br) ; this updates automatically
+         ;       (left (img ([src ,(pic_weather (finder "description" Dayton-OH))])))                                                               
+         ; (h3, (car(cdr(wotd))))
+         ;(script ((src "http://ajax.google.com/ajax/libs/jquery/3.2.1/jquery.min.js")))
+       ; (include-template "test.html")
+       )
+     ;(h3  ,(make-cdata #f #f(include-template "test.html")))
+         )))
+  
          (serve/servlet start
 #:listen-ip #f ; accept connections from external machines 
 #:port 9000 ; change port number 
