@@ -131,15 +131,7 @@
 (define btn-ok (new button%
                     [parent panel-buttons]
                     [label "Ok"]
-                    ;;[callback (λ (text-field event)
-                    ;;            (test (send txt-datetime-city get-value)))]))
                     [callback (λ (text-field event) (write-preferences))]))
-
-(define prefsx
-  (list #hasheq((weather-city . (send txt-datetime-city get-value)))
-        #hasheq((test . "ing"))       
-  ))
-
 
 (define btn-cancel
   (new button%
