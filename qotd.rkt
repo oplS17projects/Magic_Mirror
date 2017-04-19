@@ -1,16 +1,18 @@
 #lang racket
+(require racket/trace)
 
-(define qfile (open-input-file "/Users/Sunhee/documents/Magic_Mirror/quotes.txt" ))
+(define qfile (open-input-file "quotes.txt" ))
 
 
- (define (quote-helper file)
+(define (quote-helper file)
    (let ((line (read-line file)))
      (if (eof-object? line)
      '()
      (cons line (quote-helper file)))))
 
-(define (random-quote)
-  (define source (quote-helper qfile))
-(define mod (length source))
+(define quotes (quote-helper qfile))
 
-(list-ref source (remainder (arithmetic-shift (random 1 200) 10) mod)))
+(define (random-quote)
+    (let  ((length- (+ (length quotes) 1)))
+      (let ((rnd (- (random 1 length-) 1)))
+          (list-ref quotes rnd))))
