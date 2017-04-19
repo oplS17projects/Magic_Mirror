@@ -1,5 +1,5 @@
 #lang racket
-(require net/url json 2htdp/batch-io gregor gregor/time)
+(require net/url json gregor gregor/time)
 
 (require (file "api-keys.rkt"))
 
@@ -33,37 +33,27 @@
 (define (coordinates city state-country)
   (make-dir "weather_data")
   (make-dir "weather_data/current")
-
-  (get-weather city state-country)
-  
-  )
+  (get-weather city state-country))
 
 (define (parse-coords filename)
-  (define json-data (call-with-input-file filename read-json))
-  (define coord-val (hash-ref json-data 'coord))
-  
-  (define coords (list
-                   (cons "lat"
-                         (hash-ref coord-val 'lat))
-                   (cons "lng"
-                         (hash-ref coord-val 'lon))
-                   ))
-  coords
-  )
+  (let ([json-data (call-with-input-file filename read-json)])
+    (let ([coord-val (hash-ref json-data 'coord)])
+      (let ([coords (list
+                     (cons "lat" (hash-ref coord-val 'lat))
+                     (cons "lng" (hash-ref coord-val 'lon)) )])
+        coords))))
 
 (define (get-weather city state-country)
-  (define filename (string-append "weather_data/current/" city " - " state-country ".json"))
-  (cond
-    [(equal? (cache-valid? filename) #t) (parse-coords filename)]
-    [(and (download-weather city state-country) (cache-valid? filename))
-     (parse-coords filename)]
-    [else '()])
-  )
+  (let ([filename (string-append "weather_data/current/" city " - " state-country ".json")])
+    (cond
+      [(equal? (cache-valid? filename) #t) (parse-coords filename)]
+      [(and (download-weather city state-country) (cache-valid? filename))
+       (parse-coords filename)]
+      [else '()])))
 
 (define (download-weather city state-country)
   (with-handlers ([exn:fail:network? (network-failure)])
-    (fetch-weather city state-country))
-    )
+    (fetch-weather city state-country)))
 
 (define (get-file-age filename)
   (file-or-directory-modify-seconds filename #f)
@@ -77,13 +67,19 @@
       (make-directory path))
   )
 
+
+(define (write-out file-path data)
+  (call-with-output-file* file-path #:exists 'replace #:mode 'text
+   (lambda (x)
+     (display data x))))
+
 (define (fetch-weather city state-country)
   (let ([file-path (string-append "weather_data/current/"  city " - " state-country ".json")])
   (let ([remote-data
          (port->string (get-pure-port
                         (string->url
                          (string-append weather-url (string-append city "," state-country) weather-options "&appid=" weather-key))))])
-    (write-file file-path remote-data)
+    (write-out file-path remote-data)
   )))
 
 ;;FORMAT: new Date(year, month, day, hours, minutes, seconds, milliseconds);
