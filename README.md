@@ -3,45 +3,36 @@
 ### Statement
 Mirror, mirror on the wall...  
 
-The Magic Mirror is an IoT-based project that adds various pieces of information to a mirror. Using a double-sided mirror, an LCD TV, and a Raspberry Pi it's possible to provide information that appears in the glass of the mirror, while maintaining the reflectivity required of a mirror.  
+The Magic Mirror was an IoT-based project that display various pieces of information to a mirror.  The output was minimalistic and displayed on the lateral, top or bottom sides.  The background of the mirror was kept black which minimizes the amount of light leaking through.  All text and images are white to allow for maximum visibility due to ambient light.   
 
-In order to achieve the desired result, the output should remain minimalist and towards the sides and possibly the bottom of the mirror. The background should remain black to prevent as much light as possible from leaking through and the text should be white to provide maximum visibility. Graphics should also be as minimal as possible, or possibly excluded.  
+The Raspberry Pi 3 Model B was the computer that powers the mirror.  Raspbian, the Debian-based Linux distribution has been loaded onto the Raspberry Pi because it supports Racket.  A Samsung 24 inch LED HDTV was the screen that will serve as the projector.  The TV has a two-way mirror mounted on top of it.  Our magic mirror has four different modules.  An end user can configure global weather information, global time, a word of the day and a quote of the day.  
 
-We will attempt to bring a magic mirror in for presentation, but cost, weather, and transportation issues will need to be worked out. If we're unable to bring a mirror in for presentation, we'll still be able to present the project, though in a less fun manner.
+
 
 ### Analysis
-While other techniques will almost certainly be brought in as we develop the project, these are what I know to be used at the time of this writeup.  
-
-While working on FP3, we've found the need for recursion in parsing data sets.  These sets were not including the FP3 submission, but will be reintroduced in the coming weeks.  
-
-Designing with data abstraction in mind has also made it easier for us to interact with.  For instance, within FP3 I've constructed two functions for getting and parsing weather.  The implementation and storage information are hidden away.  This allowed for multiple changes to the code, filesystem, and even different data streams without having to force my partner to alter his design.
+Designing with data abstraction in mind has made it easier for us to interact with each other’s code.  Implementation and storage details have not been actively discussed.  This allows for either of us to change code, filesystems and data streams without forcing the other to alter his design.  Linear recursion was used in a lot of our parsing, searching and filtering functions.   
 
 ### External Technologies
-#### Raspberry Pi
-- The Raspberry Pi 3 Model B will be the computer that drives the mirror. Raspbian, the Debian-based Linux distribution that I've loaded onto the Raspberry Pi supports Racket.
+The Raspberry Pi 3 Model B was the computer that powers the mirror.  Raspbian, the Debian-based Linux distribution has been loaded onto the Raspberry Pi because it supports Racket.  A Samsung 24 inch LED HDTV was the screen that will serve as the projector.  The TV has a two-way mirror mounted on top of it.  Our magic mirror has four different modules.  An end user can configure global weather information, global time, a word of the day and a quote of the day.
 
 #### Web Communications
-- The weather "module" currently connects to, and downloads data from [OpenWeatherMap.org](http://openweathermap.org/).  This data will be displayed via Racket webserver.  Other modules and functionality are planned.
+- Any weather information was obtained using a free API key from OpenWeatherMap.  Time information was obtained both from OpenWeatherMap and Timezonedb.  The word of the day information was directly from Dictionary.com.
+
 
 ### Data Sets or other Source Materials
-The project currently downloads and parses JSON data. The information is converted into a complex list structure which than can be more easily read and worked with while populating the user interface.  
-
-Other data sets are currently planned and will use a similar approach.
-
+The web communication information was converted into a complex list structure to make reading and working with the data easier.  Both global weather and global time information are procured by downloading and parsing JSON data.  The word of the day was webscraped directly from Dictionary.com.  The quote of the day was created by reading from a local text document and converting that data into a list.
 ### Deliverable and Demonstration
-The final product will display a minimalist output of information chosen by the end user on an internal webserver.  Without the mirror, it will simply be a display of the parsed data at the specified locations.
-
+The final product will be the magic mirror itself which can be customized as an end user sees fit.
 
 ### Evaluation of Results
-Results will be determined by unit testing, file-caching, and error handling. Success will be claimed when all tests have passed and the mirror is able to display information, either current or cached depending on the state of the network.
-
+The working mirror will be the ultimate test of our success. 
 
 ## Architecture Diagram
 ![FP4 Diagram](https://github.com/oplS17projects/Magic_Mirror/blob/master/fp4-diagram-v2.png "FP4 Diagram")  
 
-The front-end is responsible for requesting the current weather and/or forecast data for a specified city and country/state. It parses these results and displays them on the mirror.  
+The front-end.rkt file is the heart of our mirror because it requests information from other .rkt files.  It will parse the resulting information and display them on the mirror.   
 
-The weather.rkt recieves the request from the front-end.  It determines if there's a new enough cache-file stored locally.  If there is, it parses that into a list and returns that to the front-end.  If the cache file is deemed too old or is not available, it requests a new file from OpenWeatherMap. If the network is unavailable and the cache is missing a null list is returned.
+For example  if the weather.rkt recieves the request from the front-end.  It determines if there's a new enough cache-file stored locally.  If there is, it parses that into a list and returns that to the front-end.  If the cache file is deemed too old or is not available, it requests a new file from OpenWeatherMap. If the network is unavailable and the cache is missing a null list is returned.
 
 ## Schedule
 ### First Milestone (Sun Apr 9)
