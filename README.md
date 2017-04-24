@@ -65,7 +65,7 @@ The GUI will include other "modules" if provided and will allow displaying of mo
 The GUI styling will be finalized.
 
 ### Public Presentation (Mon Apr 24, Wed Apr 26, or Fri Apr 28 [your date to be determined later])
-Its our intention to build and show a magic mirror for presentation, but there are several issues that we'll need to resolve first.
+Its our intention to build and show a magic mirror for our presentation on Friday April 28th.  We will be presenting at the Tsongas Center.  
 
 ## Group Responsibilities
 ### Steve Warren @LordSpaghettiOs
