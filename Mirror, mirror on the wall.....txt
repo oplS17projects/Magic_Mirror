@@ -1,0 +1,24 @@
+Mirror, mirror on the wall...
+
+The Magic Mirror is an IoT-based project that display various pieces of information to a mirror. 
+For this mirror we will use a double sided mirror, an LCD TV and a Raspberry Pi. The output will be minimalistic and displayed on the lateral, top or bottom sides.  The background of the mirror will remain black which will minimize the amount of light leaking through.  All text and images will be white to allow for maximum visibility due to ambient light.   
+
+The Raspberry Pi 3 Model B will be the computer that powers the mirror.  Raspbian, the Debian-based Linux distribution has been loaded onto the Raspberry Pi because it supports Racket.  A Samsung 24 inch LED HDTV is the screen that will serve as the projector.  The TV has a two-way mirror mounted on top of it.  Our magic mirror has four different modules.  An end user can configure global weather information, global time, a word of the day and a quote of the day.  
+
+Analysis 
+
+Designing with data abstraction in mind has made it easier for us to interact with each other’s code.  Implementation and storage details have not been actively discussed.  This allows for either of us to change code, filesystems and data streams without forcing the other to alter his design.  Linear recursion is used in a lot of our parsing, searching and filtering functions.   
+
+Web Communications
+
+Any weather information was obtained using a free API key from OpenWeatherMap.  Time information was obtained both from OpenWeatherMap and Timezonedb.  The word of the day information is directly from Dictionary.com.
+
+Data Sets or other Source materials
+
+This information is converted into a complex list structure to make reading and working with the data easier.  Both global weather and global time information are procured by downloading and parsing JSON data.  The word of the day is webscraped directly from Dictionary.com.  The quote of the day is created by reading from a local text document and converting that data into a list.  
+
+Deliverable and Demonstration
+The final product will be the magic mirror itself which can be customized as an end user sees fit.  
+
+Evaluation of Results
+The working magic mirror itself will be the true determination of success?

@@ -1,8 +1,7 @@
 #lang racket
 (require racket/trace)
-
+(provide random-quote)
 (define qfile (open-input-file "quotes.txt" ))
-
 
 (define (quote-helper file)
    (let ((line (read-line file)))

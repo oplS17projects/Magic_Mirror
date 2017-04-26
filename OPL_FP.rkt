@@ -7,6 +7,7 @@
 (require (file "time.rkt"))
 (require (file "weather.rkt"))
 (require (file "preferences.rkt"))
+(require (file "qotd.rkt"))
 
 ;; TODO: integrate files below 
 ;(require (file "wotd.rkt"))
