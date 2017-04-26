@@ -25,7 +25,7 @@ The web communication information was converted into a complex list structure to
 The final product will be the magic mirror itself which can be customized as an end user sees fit.
 
 ### Evaluation of Results
-The working mirror will be the ultimate test of our success. 
+The working mirror will be the ultimate test of our success. Smaller tests were done on a laptop screen to test out the layout. 
 
 ## Architecture Diagram
 ![FP4 Diagram](https://github.com/oplS17projects/Magic_Mirror/blob/master/fp4-diagram-v2.png "FP4 Diagram")  
