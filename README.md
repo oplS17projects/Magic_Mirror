@@ -3,64 +3,77 @@
 ### Statement
 Mirror, mirror on the wall...  
 
-The Magic Mirror was an IoT-based project that display various pieces of information to a mirror.  The output was minimalistic and displayed on the lateral, top or bottom sides.  The background of the mirror was kept black which minimizes the amount of light leaking through.  All text and images are white to allow for maximum visibility due to ambient light.   
-
-The Raspberry Pi 3 Model B was the computer that powers the mirror.  Raspbian, the Debian-based Linux distribution has been loaded onto the Raspberry Pi because it supports Racket.  A Samsung 24 inch LED HDTV was the screen that will serve as the projector.  The TV has a two-way mirror mounted on top of it.  Our magic mirror has four different modules.  An end user can configure global weather information, global time, a word of the day and a quote of the day.  
-
+The Magic Mirror is a smart mirror that displays various items of interest, such as the weather within the reflective surface of the mirror.  The minimalist design allows information to be displayed on the edges of the mirror, where they're least likely to be  intrusive.  The colors were restricted to black and white in order to provide maximum visibility of the information to be displayed and minimize interference from the unused sections of the screen. The information on display is dynamically generated HTML that is created and served by Racket.   
 
 
 ### Analysis
-Designing with data abstraction in mind has made it easier for us to interact with each other’s code.  Implementation and storage details have not been actively discussed.  This allows for either of us to change code, filesystems and data streams without forcing the other to alter his design.  Linear recursion was used in a lot of our parsing, searching and filtering functions.   
+Data abstraction is used throughout the project.  The intent was to simplify communicating between modules and between partners.  This allowed for exposing only the required functions while keeping others hidden away.  
+
+Recursion is used throughout the project in building of lists, parsing of data and displaying the data within the mirror.
+
 
 ### External Technologies
-The Raspberry Pi 3 Model B was the computer that powers the mirror.  Raspbian, the Debian-based Linux distribution has been loaded onto the Raspberry Pi because it supports Racket.  A Samsung 24 inch LED HDTV was the screen that will serve as the projector.  The TV has a two-way mirror mounted on top of it.  Our magic mirror has four different modules.  An end user can configure global weather information, global time, a word of the day and a quote of the day.
+A Raspberry Pi 3 Model B is the computer that behind the mirror.  Raspbian, the Debian-based Linux distribution has been loaded onto the Raspberry Pi due to its support of Racket. The mirror uses a Samsung 24 inch LED HDTV with a two-way acrylic mirrored sheet serving as the mirror. The mirror currently has six dedicated locations for placing "modules" with four of those locations in use.
 
-#### Web Communications
-- Any weather information was obtained using a free API key from OpenWeatherMap.  Time information was obtained both from OpenWeatherMap and Timezonedb.  The word of the day information was directly from Dictionary.com.
+
+### Web Communications
+The weather information comes from OpenWeatherMap and the date and time information comes from a combination of both [OpenWeatherMap.org](http://openweathermap.org/) and [TimezoneDB.com](https://timezonedb.com/).  The Word Of The Day module uses webscraping to retrieve its information from [Dictionary.com](http://www.dictionary.com/wordoftheday/).
 
 
 ### Data Sets or other Source Materials
-The web communication information was converted into a complex list structure to make reading and working with the data easier.  Both global weather and global time information are procured by downloading and parsing JSON data.  The word of the day was webscraped directly from Dictionary.com.  The quote of the day was created by reading from a local text document and converting that data into a list.
+The external data sets are mentioned above.  The internal data sets including manipulating stored JSON hash-sets into lists for front-end consumption.  The preference system also stored its settings in JSON and parses them for the front-end.
+
+
 ### Deliverable and Demonstration
-The final product will be the magic mirror itself which can be customized as an end user sees fit.
+The end product as described in the statement section at the top of this document will be on display at the Tsongas Center at the [i2i Conference](https://www.uml.edu/conferences/i2i/).
+
 
 ### Evaluation of Results
-The working mirror will be the ultimate test of our success. Smaller tests were done on a laptop screen to test out the layout. 
+The mirror was tested using several random locations for both weather and for time. Testing was done without network connectivity to simulate an outage.  The mirror should continue to function with cached data.  If no cached data is available, the affected module should return a null list.
 
-## Architecture Diagram
-![FP4 Diagram](https://github.com/oplS17projects/Magic_Mirror/blob/master/fp4-diagram-v2.png "FP4 Diagram")  
 
-The front-end.rkt file is the heart of our mirror because it requests information from other .rkt files.  It will parse the resulting information and display them on the mirror.   
+### Architecture Diagram
+![Architecture Diagram](https://github.com/oplS17projects/Magic_Mirror/blob/master/fp4-diagram-v2.png "Architecture Diagram")  
 
-For example  if the weather.rkt recieves the request from the front-end.  It determines if there's a new enough cache-file stored locally.  If there is, it parses that into a list and returns that to the front-end.  If the cache file is deemed too old or is not available, it requests a new file from OpenWeatherMap. If the network is unavailable and the cache is missing a null list is returned.
+The OPL-FP.rkt file serves as the heart of the mirror.  Its job is to request data from the modules, generate a dynamic page and spawn the web server used to display the data within the mirror.   
+
+The time.rkt module takes the latitude and longitude information from openweathermap.org and combines that with the request made from timezonedb.com in order to get the date and time for a given location by name. Without the latitude and longitude information from openweathermap, a subscription-based key would be necessary to obtain the data required.  
+
+The weather.rkt will obtain either the current weather or forecast for a specified location.
+
+The wotd.rkt module uses webscraping in order to obtain its data from dictionary.com. The coding goal of this module was to try webscraping. All other modules at this point make use of public APIs.
+
+The preferences.rkt both reads and writes user preferences. In order to set preferences, the user would require a keyboard.  By entering (set-preferences) into the REPL, the user would be presented with a GUI that allows for simplified configuration.  The main application can ask for the preferences and have them returned as a list. If the mirror is run without the user setting preferences, a default preference file is created with Lowell, MA as the defaults for time and weather.  Reading preferences is done without a GUI.
 
 ## Schedule
 ### First Milestone (Sun Apr 9)
 #### Steve Warren
-The weather portion of the project will be functional. It will allow downloading of current or forecast data and parsing JSON into a list format. Network connectivity error-handling will be in place, as will file-caching.  
+The weather portion of the project was made functional. It allows for downloading current or forecast data and parsing JSON into a list format. Network connectivity and error-handling were put in place, as was file-caching.  
 
-The file-caching will serve as a source of data while internet services are unavailable, and will prevent bombarding the serive provider with multiple requests over a short period of time. At the time of this writing, the cache-file will be prefered to downloading new data if the file is less than one hour old.
+The file-caching serves as a source of data while Internet services are unavailable, and will prevent bombarding the service provider with multiple requests over a short period of time. The cache-file will be preferred to downloading a new data if the file is less than one hour old.
 
 #### Steve Kim
 Implement a basic GUI with static placement. As weather is the only source of data available at this point it will be the only thing shown.  
 
 The GUI will have the weather hard-coded into the upper left and will unlikely have the final styling in place.
 
+
 ### Second Milestone (Sun Apr 16)
 #### Steve Warren
-Unit tests will be in place. Additional backend "modules" are being discussed.
+Preferences were put into place as were additional modules. 
+
 
 #### Steve Kim
 The GUI will include other "modules" if provided and will allow displaying of modules on screen in a user-specified manner. This will most likely be done with a config file, but needs be researched further.  
 
 The GUI styling will be finalized.
 
-### Public Presentation (Mon Apr 24, Wed Apr 26, or Fri Apr 28 [your date to be determined later])
-Its our intention to build and show a magic mirror for our presentation on Friday April 28th.  We will be presenting at the Tsongas Center.  
+### Public Presentation: Fri Apr 28
+As stated in the Deliverable and Demonstration section.  The Magic Mirror will be on display at the Tsongas Center 4/27/2017.
 
 ## Group Responsibilities
 ### Steve Warren @LordSpaghettiOs
-Lead: Will work on the backend components and hardware
+Lead: Will work on the back-end components and hardware
 
 ### Steve "Wildcat" Kim @kimste2
-Will work on the frontend components and GUI design
+Will work on the front-end components and GUI design
