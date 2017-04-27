@@ -92,12 +92,28 @@
                          (hash-ref main-val 'humidity))
                    (cons "wind"
                          (/ (hash-ref wind-val 'speed) 0.3048)) ;convert from m/s to ft/s
+                   (cons "id"
+                         (hash-ref weather-val 'id))
                    (cons "description"
-                         (hash-ref weather-val 'main))
+                         (hash-ref weather-val 'description))
+                   (cons "icon"
+                         (weather-group (hash-ref weather-val 'id)))
                    ))
   current-weather
   )
 
+; cherry-picking from the atmosphere, extreme and additional groups
+; http://openweathermap.org/weather-conditions
+(define (weather-group id)
+  (cond [(and (>= id 200) (<= id 299)) "Thunderstorms"]
+        [(and (>= id 300) (<= id 399)) "Drizzle"]
+        [(and (>= id 500) (<= id 599)) "Rain"]
+        [(and (>= id 600) (<= id 699)) "Snow"]
+        [(and (>= id 801) (<= id 899)) "Cloudy"]
+        [(and (>= id 900) (<= id 906)) "Extreme"]
+        [(and (>= id 952) (<= id 959)) "Windy"]
+        [(= id 800) "Clear"]
+        [else "unknown"]))
 
 (define (create-forecast-list data results-list)
     (if (null? data) (cons results-list null)
@@ -126,7 +142,8 @@
           (list
            (cons "high" (hash-ref temp-val 'max))
            (cons "low" (hash-ref temp-val 'min))
-           (cons "description" (hash-ref weather-val 'main))
+           (cons "description" (hash-ref weather-val 'description))
+           (cons "icon" (weather-group (hash-ref weather-val 'id)))
            (cons "date" (list
                          (cons "month" (convert-date ->month dt))
                          (cons "day" (convert-date ->day dt))
