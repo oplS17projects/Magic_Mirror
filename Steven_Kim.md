@@ -5,7 +5,7 @@
 ### April 30, 2017
 
 # Overview
-
+I worked with Steve Warren (@LordSpaghettiOs) to make a magic mirror (smart mirror).  
 
 **Authorship note:** All of the code described here was written by myself unless otherwise specified.
 
