@@ -1,0 +1,29 @@
+<style type="text/css">
+
+    .WOTD {
+    }
+
+    #setword {
+        width: auto;
+        font-size: 2em;
+        text-align: center;
+        color: #fff;
+        background: #000;
+        margin-bottom: 10px;
+    }
+
+    #setdefs {
+
+        width: auto;
+        font-size: 1.5em;
+        text-align: left;
+        color: #fff;
+        background: #000;
+    }
+    
+    #setdefs h6 {
+	    margin-top: 0px;
+	    margin-bottom: 0px;
+	}
+	
+</style>

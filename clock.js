@@ -1,10 +1,11 @@
 $(document).ready(function() {
-var monthNames = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ]; 
+var monthNames = [ "null", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ]; 
+var monthNamesShort = [ "null", "Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec" ];
 var dayNames= ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]
 
 var newDate = testDate;
 newDate.setDate(newDate.getDate());  
-$('#Date').html(dayNames[newDate.getDay()] + ", " +  monthNames[newDate.getMonth()] + " " + newDate.getDate() + ", " + newDate.getFullYear());
+$('#Date').html(monthNames[newDate.getMonth()] + " " + newDate.getDate() + ", " + newDate.getFullYear());
 
 setInterval( function() {
   newDate.setSeconds(newDate.getSeconds() + 1);
@@ -16,7 +17,8 @@ setInterval( function() {
   $("#min").html(( minutes < 10 ? "0" : "" ) + minutes);
   $("#period").html( hours < 12 ? "  AM" : "  PM" );
 
-  hours = (hours < 12) ? hours : hours - 12;
-  $("#hours").html(( hours < 10 ? "0" : "" ) + hours);
+  hours = (hours == 0) ? 12 : hours;
+  hours = (hours < 13) ? hours : hours - 12;
+  $("#hours").html(hours);
   },1000);
 });

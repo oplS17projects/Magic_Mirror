@@ -1,23 +1,244 @@
-<link rel="stylesheet" type="text/css" href="quote.css">
+<style type="text/css">
+    html {
+        cursor: none;
+        overflow: hidden;
+        background: #000;
+    }
 
-<div id = "qotd">
- 
+    ::-webkit-scrollbar {
+        display: none;
+    }
 
-</div> 
+    body {
+        margin: 30px;
+        position: absolute;
+        height: calc(100% - 60px);
+        width: calc(100% - 60px);
+        background: #000;
+        color: #aaa;
+        font-family: 'Josefin Sans', sans-serif;
+        -webkit-font-smoothing: antialiased;
+    }
+
+    .no-wrap {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .right {
+        right: 0;
+    }
+
+    .top {
+        top: 0;
+        position: absolute;
+    }
+
+    .top.center,
+    .bottom.center {
+        left: 50%;
+        -moz-transform: translateX(-50%);
+        -o-transform: translateX(-50%);
+        -webkit-transform: translateX(-50%);
+        -ms-transform: translateX(-50%);
+        transform: translateX(-50%);
+    }
+
+    .top.right,
+    .top.left,
+    .top.center {
+        top: 100%;
+    }
+
+    .bottom {
+        bottom: 0;
+        position: absolute;
+    }
+
+    .bottom.right,
+    .bottom.center,
+    .bottom.left {
+        bottom: 100%;
+    }
+
+    .bar {
+        width: 100%;
+        text-align: center;
+    }
+
+    #loc {
+        font-size: 2em;
+        text-align: center;
+    }
+
+    #icon-current {
+        width: auto;
+        overflow: hidden;
+    }
+
+    #icon {
+        width: 100px;
+        float: left;
+    }
+
+    #current-temp {
+        width: auto;
+        float: right;
+        font-size: 4em;
+        margin-left: 35px;
+    }
+
+    #current-weather {
+        text-align: left;
+        color: #FFF;
+        width: auto;
+    }
+    
+    #humidity {
+        text-align: right;
+        font-size: 1.25em;
+    }
+
+    #description {
+        text-align: right;
+        font-size: 1.25em;
+    }
+
+    #display {
+        width: auto;
+        float: right;
+    }
+
+    #forecast {
+        padding-top: 50px;
+        text-align: left;
+        color: #FFF;
+        width: auto;
+    }
+
+    #d1_icon img, 
+    #d2_icon img, 
+    #d3_icon img, 
+    #d4_icon img,
+    #d5_icon img
+    {
+        float: left;
+        width: 50px;
+        height: 50px;
+        padding-right: 25px;
+        padding-bottom: 10px;
+    }
+
+    #day1,
+    #day2,
+    #day3,
+    #day4,
+    #day5 {
+        width: 250px;
+        float: right;
+        clear: both;
+    }
+
+    .forecast-container {
+    }
+
+    .weather {
+        width: auto;
+    }
 
 
+</style>
 
 
+<div class="top bar">
+    <div class="top left">
+      <div class="weather">
+        <div id="current-weather">
+            <div id="loc"></div>
+            <div id="icon-current">
+                <div id="icon"></div>
+                <div id="display">
+                    <div id="description"></div>
+                    <div id="current-temp"></div>
+                    <div id="humidity"></div>
+                </div>
+            </div>
+            
+        </div>
 
+        <div id="forecast">
+            <div id="day1">
+                <div id="d1_icon"></div>
+                <div class="forecast-container">
+                    <div id="d1_toprow"></div>
+                    <div id="d1_bottomrow"></div>
+                </div>
+            </div>
+            <div id="day2">
+                <div id="d2_icon"></div>
+                <div class="forecast-container">
+                    <div id="d2_toprow"></div>
+                    <div id="d2_bottomrow"></div>
+                </div>
+            </div>
+            <div id="day3">
+                <div id="d3_icon"></div>
+                <div class="forecast-container">
+                    <div id="d3_toprow"></div>
+                    <div id="d3_bottomrow"></div>
+                </div>
+            </div>
+            <div id="day4">
+                <div id="d4_icon"></div>
+                <div class="forecast-container">
+                    <div id="d4_toprow"></div>
+                    <div id="d4_bottomrow"></div>
+                </div>
+            </div>
+            <div id="day5">
+                <div id="d5_icon"></div>
+                <div class="forecast-container">
+                    <div id="d5_toprow"></div>
+                    <div id="d5_bottomrow"></div>
+                </div>
+            </div>
+        </div>
 
+      </div>
+    </div>
 
-<!-- Don't touch 
+    <div class="top center"></div> <!-- Location 2 -->
 
-<link rel="stylesheet" type="text/css" href="quote.css">
+    <div class="top right">
+     <link rel="stylesheet" type="text/css" href="clock.css">
+        <div class="clock">
+            <div id="Location"></div>
+            <ul>
+                <li id="hours"></li>
+                <li id="colon">:</li>
+                <li id="min"></li>
+                <li id="colon">:</li>
+                <li id="sec"></li>
+                <li id="period"></li>
+            </ul>
+            <div id="Date"></div>
+        </div>
+    </div>
+</div>
 
-<div id = "qotd">
- 
+<div class="bottom bar">
 
-</div> 
+    <div class="bottom left"></div> <!-- Location 4 -->
 
--->
+    <div class="bottom center">
+        <link rel="stylesheet" type="text/css" href="wotd.css">
+        <div class="WOTD">
+            <div id="setword"></div>
+            <div id="setdefs"></div>
+        </div>
+    </div>
+
+    <div class="bottom right"></div> <!-- Location 6 -->
+
+</div>
