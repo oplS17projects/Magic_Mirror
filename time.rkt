@@ -1,7 +1,10 @@
 #lang racket
 (require net/url json gregor gregor/time)
+
 (require (file "api-keys.rkt"))
+
 (provide get-time)
+
 
 ;; Current weather URL needed to get lat and long for timezonedb
 (define weather-options "&mode=json&units=imperial&cnt=7")
@@ -17,6 +20,7 @@
       (let ([remote-data (read-json (get-pure-port (string->url timezonedb)))])
         (let ([zone (hash-ref remote-data 'zoneName)])
           (cons zone (javascript-date (hash-ref remote-data 'timestamp))))))))
+
        
 (define (network-failure)
   (λ _ (printf "Network Unavailable\n")))
