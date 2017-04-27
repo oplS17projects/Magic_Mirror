@@ -23,6 +23,13 @@ Here is a discussion of the most essential procedures, including a description o
      '()
      (cons line (quote-helper file)))))
 ```
+```racket
+(define (finder word list)
+  (cond ((null? list) "Nothing Found")
+        ((and (pair? (car list))
+              (string=? word (car(car list)))) (cdr(car list)))
+(else (finder word (cdr list)))))
+```
 ## 2. Data Abstraction
 ## 3. Higher Order Functions (HOF)
 ## 4. External Technology
