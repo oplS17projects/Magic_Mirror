@@ -1,43 +1,30 @@
-Venture outside your comfort zone. The rewards are worth it.
-All it takes is faith and trust
-A little consideration, a little thought for others, makes all the difference.
-Even miracles take a little time.
-If you focus on what you left behind, you will never be able to see what lies ahead.
-The flower that blooms in adversity is the most rare and beautiful of all.
-You control your destiny -- you don't need magic to do it. And there are no magical shortcuts to solving your problems.
-A true hero isn't measured by the size of his strength, but by the strength of his heart.
-Don't just fly, soar.
-In every job that must be done, there is an element of fun.
-Life's not a spectator sport. If watchin' is all you're gonna do, then you're gonna watch your life go by without ya.
-The problem is not the problem. The problem is your attitude about the problem.
-Believe you can, then you will.
-Today is a good day to try.
-If you don't know where you want to go, then it doesn't matter which path you take.
-The things that make me different are the things that make me ME.
-It's better to use your head than break your back.
-Admit defeat, and defeat will surely admit you into permanent custody.
-Listen with your heart, you will understand.
-Your identity is your most valuable possession. Protect it.
-Oh yes, the past can hurt. But the way I see it, you can either run from it or learn from it.
-You're braver than you believe, and stronger than you seem, and smarter than you think.
-If you don't think, then you shouldn't talk.
-Our fate lives within us. You only have to be brave enough to see it.
-I'm only brave when I have to be. Being brave doesn't mean you go looking for trouble.
-Giving up is for rookies.
-Always let your conscience be your guide.
-I give myself very good advice, but I very seldom follow it.
-Happiness is the richest thing we will ever own.
-Just because it's what's done, doesn't mean it's what should be done.
-Sometimes the right path is not the easiest one.
-Change is good.
-The only thing predictable about life is its unpredictability.
-Remember, you're the one who can fill the world with sunshine.
-Do not be followed by its commonplace appearance. Like so many things, it is not what is outside, but what is inside that counts.
-Now, think of the happiest things. It's the same as having wings.
-All our dreams can come true, if we have the courage to pursue them.
-You’re mad. Bonkers. Off your head… but I’ll tell you a secret… all of the best people are.
-Hakuna matata!
-Mirror mirror, on the wall… who’s the fairest of them all?
-Ohana means family, and family means no one gets left behind or forgotten.
-If you can’t say something nice, don’t say nothin’ at all.
-To laugh at yourself is to love yourself.
+The question of whether computers can think is like the question of whether submarines can swim.(Edsger W. Dijkstra)
+Computers are useless.  They can only give you answers.(Pablo Picasso)
+Never trust a computer you can’t throw out a window.(Steve Wozniak)
+Hardware: The parts of a computer system that can be kicked.(Jeff Pesis)
+Most software today is very much like an Egyptian pyramid with millions of bricks piled on top of each other, with no structural integrity, but just done by brute force and thousands of slaves.(Alan Kay)
+There are two major products that come out of Berkeley: LSD and UNIX.  We don’t believe this to be a coincidence.(Jeremy S. Anderson)
+Microsoft has a new version out, Windows XP, which according to everybody is the ‘most reliable Windows ever.‘ To me, this is like saying that asparagus is ‘the most articulate vegetable ever.‘ (Dave Barry)
+The bulk of all patents are crap.  Spending time reading them is stupid.  It’s up to the patent owner to do so, and to enforce them.(Linus Torvalds)
+The function of good software is to make the complex appear to be simple.(Grady Booch)
+Computer science education cannot make anybody an expert programmer any more than studying brushes and pigment can make somebody an expert painter.(Eric Raymond) 
+First, solve the problem. Then, write the code.(John Johnson)
+Optimism is an occupational hazard of programming; feedback is the treatment.(Kent Beck)
+To iterate is human, to recurse divine.(L. Peter Deutsch)
+Computer language design is just like a stroll in the park.  Jurassic Park, that is.(Larry Wall)  
+Fifty years of programming language research, and we end up with C++? (Richard A. O’Keefe)
+In C++ it’s harder to shoot yourself in the foot, but when you do, you blow off your whole leg.(Bjarne Stroustrup)
+Good code is its own best documentation.(Steve McConnell)
+Computer science is no more about computers than astronomy is about telescopes. )Edsger Dijkstra)
+Computer Science is embarrassed by the computer. (Alan Perlis)
+The purpose of computing is insight, not numbers.(Richard Hamming)
+An algorithm must be seen to be believed. (Donald Knuth)
+
+
+
+
+
+ 
+  
+
+

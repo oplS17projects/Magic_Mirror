@@ -12,6 +12,6 @@
 (define quotes (quote-helper qfile))
 
 (define (random-quote)
-    (let  ((length- (+ (length quotes) 1)))
-      (let ((rnd (- (random 1 length-) 1)))
+    (let*  ((length- (+ (length quotes) 1)))
+      (let* ((rnd (- (random 1 length-) 1)))
          (string-normalize-spaces (list-ref quotes rnd)))))
