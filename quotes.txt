@@ -19,12 +19,3 @@ Computer science is no more about computers than astronomy is about telescopes. 
 Computer Science is embarrassed by the computer. (Alan Perlis)
 The purpose of computing is insight, not numbers. (Richard Hamming)
 An algorithm must be seen to be believed. (Donald Knuth)
-
-
-
-
-
- 
-  
-
-
