@@ -14,4 +14,4 @@
 (define (random-quote)
     (let  ((length- (+ (length quotes) 1)))
       (let ((rnd (- (random 1 length-) 1)))
-          (list-ref quotes rnd))))
+         (string-normalize-spaces (list-ref quotes rnd)))))
