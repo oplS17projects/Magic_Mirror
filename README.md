@@ -35,7 +35,7 @@ The mirror was tested using several random locations for both weather and for ti
 ### Architecture Diagram
 ![Architecture Diagram](https://github.com/oplS17projects/Magic_Mirror/blob/master/fp4-diagram-v2.png "Architecture Diagram")  
 
-The OPL-FP.rkt file serves as the heart of the mirror.  Its job is to request data from the modules, generate a dynamic page and spawn the web server used to display the data within the mirror.   
+The Front-end.rkt file serves as the heart of the mirror.  Its job is to request data from the modules, generate a dynamic page and spawn the web server used to display the data within the mirror.   
 
 The time.rkt module takes the latitude and longitude information from openweathermap.org and combines that with the request made from timezonedb.com in order to get the date and time for a given location by name. Without the latitude and longitude information from openweathermap, a subscription-based key would be necessary to obtain the data required.  
 
@@ -44,6 +44,8 @@ The weather.rkt will obtain either the current weather or forecast for a specifi
 The wotd.rkt module uses webscraping in order to obtain its data from dictionary.com. The coding goal of this module was to try webscraping. All other modules at this point make use of public APIs.
 
 The preferences.rkt both reads and writes user preferences. In order to set preferences, the user would require a keyboard.  By entering (set-preferences) into the REPL, the user would be presented with a GUI that allows for simplified configuration.  The main application can ask for the preferences and have them returned as a list. If the mirror is run without the user setting preferences, a default preference file is created with Lowell, MA as the defaults for time and weather.  Reading preferences is done without a GUI.
+
+The qotd.rkt will read from a local text file.  Its job is to produce a random quote from the source text file. 
 
 ## Schedule
 ### First Milestone (Sun Apr 9)
