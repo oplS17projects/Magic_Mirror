@@ -8,7 +8,7 @@
 (require (file "weather.rkt"))
 (require (file "preferences.rkt"))
 (require (file "wotd.rkt"))
-
+(require (file "qotd.rkt"))
 
 ; functions
 (define (finder word list)
@@ -65,7 +65,8 @@
 (define weather-current-desc (string-append "<script>$(document).ready(function() {$(\"#description\").html(\"" (cdr (assoc "description" weather-current)) "\");});</script>"))
 (define weather-current-icon (string-append "<script>$(function(){$(\"#icon\").html('<img id=\"current-icon\" src=\"" (cdr (assoc "icon" weather-current)) ".png\" alt=\"icon\" />');});</script>"))   
 
-; new stuff here
+(define get-quote (string-append "<script>$(document).ready(function() {$(\"#quote\").html(\"" (random-quote) "\");});</script>"))
+
 (define (generate-forecast count items script-string)
   (if (> count 5) script-string
       (begin
@@ -86,10 +87,7 @@
 
 (define five-day-forecast (generate-forecast 1 weather-forecast ""))
 
-;<div id="d1_icon"></div>
-          ;<div id="d1_date"></div>
-          ;<div id="d1_desc"></div>
-          ;<div id="d1_hilo"></div>
+
 
 ; nighttime icons start at 9pm
 ; daytime icons start at 6am
@@ -111,7 +109,9 @@
 
           ; forecast weather
           (div , (make-cdata #f #f five-day-forecast))
-          
+
+          ; qotd
+          (div , (make-cdata #f #f get-quote))
           
           ; date/time
           (div ,(make-cdata #f #f display-date-time))
