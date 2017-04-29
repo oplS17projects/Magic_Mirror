@@ -1,4 +1,3 @@
-
 # Magic Mirror
 
 ## Steve Kim 
@@ -22,11 +21,11 @@ The mirror required ten libraries.  Each module, such as the weather, was contai
 (require (file "wotd.rkt"))
 (require (file "qotd.rkt"))
 ```
-The web-server/servlet library provided server which is the heart of the mirror. 
-The web-server/templates library allowed us to use existing css and html templates to arrange the modules in our mirror. 
-The xml library allowed for parsing and generating xml code for customizing our modules.  
+The ```web-server/servlet``` library provided server which is the heart of the mirror. 
+The ```web-server/http``` http is used withint our servlet.
+The ```web-server/templates``` library allowed us to use existing css and html templates to arrange the modules in our mirror. 
+The ```xml``` library allowed for parsing and generating xml code for customizing our modules. This library had a function ```(make-cdata) ``` that was used heavily in the servlet.  Every module uses this function to have character data.
 
- 
 # Key Code Excerpts
 Here is a discussion of the most essential procedures, including a description of how they embody ideas from UMass Lowell's COMP.3010 Organization of Programming languages course.
 
@@ -84,5 +83,47 @@ It is then called in the severlet this way.
 (div , (make-cdata #f #f get-quote))
 ```
 ## 3. Higher Order Functions (HOF)
-The finder function mentioned in the recursion section is the best sample of a HOF since it operates on a list of pairs.  Its behavior is analogous to filter.  
-## 4. External Technology
+The finder function notated in the recursion section is the best sample of a HOF since it operates on a list with elements being pairs.  Its behavior is analogous to filter returning what I was searching for.  This function was used heavily in developing and displaying weather information.  This was all well part of the abstraction barrier since the structure of the list was communicated previously.    
+
+## 4.  Functional Approach To Processing Data
+```Racket
+(define get-quote (string-append "<script>$(document).ready(function() {$(\"#quote\").html(\"" (random-quote) "\");});</script>"))
+(define (start req)
+  (response/xexpr
+   `(html(head
+          (title "Magic Mirror"); title of webpage; "`" is called a quasiqutoe
+          (script ((src "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js")))
+          ,(make-cdata #f #f font-include))
+         
+         (body
+          ; current weather
+          (div , (make-cdata #f #f weather-current-icon))
+          (div , (make-cdata #f #f weather-current-loc))
+          (div , (make-cdata #f #f weather-current-current))
+          (div , (make-cdata #f #f weather-current-humidity))
+          (div , (make-cdata #f #f weather-current-desc))
+
+          ; forecast weather
+          (div , (make-cdata #f #f five-day-forecast))
+
+          ; qotd
+          (div , (make-cdata #f #f get-quote))
+          
+          ; date/time
+          (div ,(make-cdata #f #f display-date-time))
+          (div ,(make-cdata #f #f display-date-time-city))
+          (script ((src "clock.js")))
+          
+          ; word of the day
+          (div ,(make-cdata #f #f word-of-the-day))
+          (div ,(make-cdata #f #f defs-of-the-day))
+          
+          (script ((src "wotd.js")))
+
+          ; template
+          (div ,(make-cdata #f #f (include-template "layout.html"))))))) 
+          ```
+          The above code is the heart of the mirror.  Each display component has a div tag associated with it.  The function make-cdta allowed for defined functioned outputs to be displayed using templates. The above example shows how a random quote  was generated.  The ```(random-quote) ``` returnts a strings which gets appended to a script.  This script is bound to ```get-quote```  which it contained in ```(div, (make-cdata #f #F get-quote))```.  The webpage itself is an occurance of the above function.  
+
+## External Technology
+Our group was one of the few groups who utalized external technology in our project.  The mirror itself is composed of a HDTV and a piece of reflective plastic.  Sadly at the I2I convention the powerful lights reduced the visability of the mirror.  However it was still visibil if you stood close to it.  
