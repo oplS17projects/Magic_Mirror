@@ -122,8 +122,15 @@ The finder function notated in the recursion section is the best sample of a HOF
 
           ; template
           (div ,(make-cdata #f #f (include-template "layout.html"))))))) 
-          ```
-          The above code is the heart of the mirror.  Each display component has a div tag associated with it.  The function make-cdta allowed for defined functioned outputs to be displayed using templates. The above example shows how a random quote  was generated.  The ```(random-quote) ``` returnts a strings which gets appended to a script.  This script is bound to ```get-quote```  which it contained in ```(div, (make-cdata #f #F get-quote))```.  The webpage itself is an occurance of the above function.  
+``` 
+          
+The above code is the heart of the mirror.  Each display component has a div tag associated with it.
+The function make-cdta allowed for defined functioned outputs to be displayed using templates. The above example shows how a 
+random quote  was generated.  The ```(random-quote)```  returnts a strings which gets appended to a script.  This script is 
+bound to ```get-quote```  which it contained in ```(div, (make-cdata #f #F get-quote))```.  The webpage itself is an 
+occurance of the above function.  
 
 ## External Technology
-Our group was one of the few groups who utalized external technology in our project.  The mirror itself is composed of a HDTV and a piece of reflective plastic.  Sadly at the I2I convention the powerful lights reduced the visability of the mirror.  However it was still visibil if you stood close to it.  
+Our group was one of the few groups who utalized external technology in our project.  The mirror itself is composed of a HDTV 
+and a piece of reflective plastic.  Sadly at the I2I convention the powerful lights reduced the visability of the mirror.  
+The mirror itself was a great success.  
