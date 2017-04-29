@@ -10,18 +10,23 @@ I worked with Steve Warren (@LordSpaghettiOs) to make a magic mirror (smart mirr
 **Authorship note:** All of the code described here was written by myself unless otherwise specified.
 
 # Libraries Used
+The mirror required ten libraries.  Each module, such as the weather, was containted in its own Racket file which concealed its implmentation.     
 ```Racket
 (require web-server/servlet-env
          web-server/templates
          web-server/http
-         xml
-         racket/date )
+         xml)
 (require (file "time.rkt"))
 (require (file "weather.rkt"))
 (require (file "preferences.rkt"))
 (require (file "wotd.rkt"))
 (require (file "qotd.rkt"))
 ```
+The web-server/servlet library provided server which is the heart of the mirror. 
+The web-server/templates library allowed us to use existing css and html templates to arrange the modules in our mirror. 
+The xml library allowed for parsing and generating xml code for customizing our modules.  
+
+ 
 # Key Code Excerpts
 Here is a discussion of the most essential procedures, including a description of how they embody ideas from UMass Lowell's COMP.3010 Organization of Programming languages course.
 
