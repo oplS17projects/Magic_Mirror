@@ -79,5 +79,9 @@ In addition any web scripting code simply called a Racket function which would r
 ```racket
 (define get-quote (string-append "<script>$(document).ready(function() {$(\"#quote\").html(\"" (random-quote) "\");});</script>"))
 ```
+It is then called in the severlet this way.  
+```Racket
+(div , (make-cdata #f #f get-quote))
+```
 
 ## 4. External Technology
