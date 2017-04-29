@@ -83,5 +83,6 @@ It is then called in the severlet this way.
 ```Racket
 (div , (make-cdata #f #f get-quote))
 ```
-
+## 3. Higher Order Functions (HOF)
+The finder function mentioned in the recursion section is the best sample of a HOF since it operates on a list of pairs.  Its behavior is analogous to filter.  
 ## 4. External Technology
