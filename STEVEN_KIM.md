@@ -131,6 +131,6 @@ bound to ```get-quote```  which it contained in ```(div, (make-cdata #f #F get-q
 occurance of the above function.  
 
 ## External Technology
-Our group was one of the few groups who utalized external technology in our project.  The mirror itself is composed of a HDTV 
+Our group was one of the few groups who utilized external technology in our project.  The mirror itself is composed of a HDTV 
 and a piece of reflective plastic.  Sadly at the I2I convention the powerful lights reduced the visability of the mirror.  
 The mirror itself was a great success.  
